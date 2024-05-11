@@ -27,14 +27,15 @@ STEP 6: Use zscore of to remove outliers
     <td width=50%>
 
 ### 1) Read and display DataFrame
-```Python
+```
+Python
 import pandas as pd
 df=pd.read_csv("/content/SAMPLEIDS.csv")
 df
-```
+
   </td>
   <td>
-              
+```              
 #### OUTPUT:
 
 ![ee1](https://github.com/silambarasan2004/exno1/assets/119559917/183060b7-b837-4c62-96cb-1099c4836c5e)
