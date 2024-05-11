@@ -1,253 +1,227 @@
-# Exno:1
-Data Cleaning Process
+ <h1 align="center">Ex. 1   Data Cleaning and Outlier Detection & Removal</h1>
 
-# AIM
-To read the given data and perform data cleaning and save the cleaned data to a file.
 
-# Explanation
-Data cleaning is the process of preparing data for analysis by removing or modifying data that is incorrect ,incompleted , irrelevant , duplicated or improperly formatted. Data cleaning is not simply about erasing data ,but rather finding a way to maximize datasets accuracy without necessarily deleting the information.
+## AIM
+### To read the given data and perform data cleaning and save the cleaned data to a file.
 
-# Algorithm
-STEP 1: Read the given Data
+## Explanation
+### Data cleaning is the process of preparing data for analysis by removing or modifying data that is incorrect ,incompleted , irrelevant , duplicated or improperly formatted. Data cleaning is not simply about erasing data ,but rather finding a way to maximize datasets accuracy without necessarily deleting the information.
 
-STEP 2: Get the information about the data
+## Algorithm
+### STEP 1
+#### Read the given Data
 
-STEP 3: Remove the null values from the data
+### STEP 2
+#### Get the information about the data
 
-STEP 4: Save the Clean data to the file
+### STEP 3 
+#### Remove the null values from the data
 
-STEP 5: Remove outliers using IQR
+### STEP 4
+#### Save the Clean data to the file
 
-STEP 6: Use zscore of to remove outliers
+### STEP 5
+#### Remove outliers using IQR
 
-# Coding and Output
-## Data cleaning
-<table>
-  <tr>
-    <td width=50%>
+### STEP 6
+#### Use zscore of to remove outliers
 
-### 1) Read and display DataFrame
-```
+## Coding and Outputs
+
+<h3 align="center">Data Cleaning</h3>
+
+```py
 import pandas as pd
-df=pd.read_csv("/content/SAMPLEIDS.csv")
+import numpy as np
+import seaborn as sns
+import os 
+df=pd.read_csv("SAMPLEIDS.csv")
 df
-
-  </td>
-  <td>
-```              
-#### OUTPUT:
-
-![ee1](https://github.com/silambarasan2004/exno1/assets/119559917/183060b7-b837-4c62-96cb-1099c4836c5e)
-
-
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-              
-### 2) Display head
 ```
-df.head(3)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/ed03bbd1-7c97-4cd8-8cf0-3f5f9e14dcc8)
 
-  </td>
-  <td>
-```       
-#### OUTPUT:
-
-![e1](https://github.com/silambarasan2004/exno1/assets/119559917/48941fad-c506-4ef0-9bae-a562124a33e1)
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-
-### 3) Display tail
-```
-df.tail(3)
-
-  </td>
-  <td>
-```
-              
-#### OUTPUT:
-
-![e2](https://github.com/silambarasan2004/exno1/assets/119559917/cdbf2fab-f1dd-4e13-819b-6069757f68fc)
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-
-### 4) Info of datafram
-```
-df.info()
-
-  </td>
-  <td>
-```              
-#### OUTPUT:
-
-![e3](https://github.com/silambarasan2004/exno1/assets/119559917/a186d673-2c43-4feb-b585-a100e2dc4244)
-
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-
-### 5) Describe about the dataframe
-```
-df.describe()
-
-  </td>
-  <td>
-```              
-#### OUTPUT:
-
-![e4](https://github.com/silambarasan2004/exno1/assets/119559917/4529ad5b-e4dc-4820-a3a2-cca559af6fb4)
-
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-
-### 6) Shape of the datafram
-```
-df.shape
-
-  </td>
-  <td>
-   ```           
-#### OUTPUT:
-
-![e5](https://github.com/silambarasan2004/exno1/assets/119559917/0f5dae52-3ff7-4b16-839a-d36c5346a976)
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-
-### 7) Checking tha NUll values
-```
+```py
 df.isnull().sum()
-```
-  </td>
-  <td>
-   ```           
-#### OUTPUT:
-
-![e6](https://github.com/silambarasan2004/exno1/assets/119559917/17c18e4d-e987-41d2-b5be-730ab8c49517)
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-
-### 8) Drop the Null values
-```
-df.nunique()
 
 ```
-  </td>
-  <td>
-   ```           
-#### OUTPUT:
 
-![Screenshot 2024-03-08 110722](https://github.com/silambarasan2004/exno1/assets/119559917/1e56d410-8fe5-4a68-b5cf-8c46504535a2)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/57d42b69-bd5e-4c22-b8e8-6f2ae3f0404a)
 
 
-</td>
-</tr>
-<tr>
-  <td width=50%>
 
-### 9) Finding the mean value
+```py
+df.isnull().any()
 ```
-mn=df.TOTAL.mean()
-mn
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/918f392c-8185-4d11-94f3-63785887574c)
 
-  </td>
-  <td>
-```              
-#### OUTPUT:
-
-![Screenshot 2024-03-08 110804](https://github.com/silambarasan2004/exno1/assets/119559917/ce60b3c7-c6c0-4080-81fa-907abab8d05c)
-
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-
-### 10) Fill Null value with Mean value
+```py
+df.dropna()
 ```
-df.TOTAL.fillna(mn,inplace=True)
-df
 
-  </td>
-  <td>
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/38354c0d-60a4-4c93-a25d-4302bad7ac62)
+
+```py
+df.fillna(0)
 ```
-#### OUTPUT:
 
-![Screenshot 2024-03-08 110834](https://github.com/silambarasan2004/exno1/assets/119559917/c8aeb491-0d32-4ed5-9633-2d818cf76120)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/2b8ac0df-d0c1-46e1-87a4-ff8f930ff3d7)
 
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-    
-### 11) Finding minimum value
+```py
+df.fillna(method = 'ffill')
 ```
-mn=df.M3.min()
-mn
 
-  </td>
-  <td>
-   ```           
-#### OUTPUT:
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/87b27264-923b-4b0d-904f-106894f0fbcd)
 
+```py
 
-![Screenshot 2024-03-08 111152](https://github.com/silambarasan2004/exno1/assets/119559917/75ab6384-6d91-4e7b-a84e-404e612b8161)
-
-
-
-
-</td>
-</tr>
-<tr>
-  <td width=50%>
-
-### 12) Printing only Date of Birth
+df.fillna(method = 'bfill')
 ```
-df['cd']=pd.to_datetime(df['DOB'])
-df['cd']
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/9a0df734-21b5-4b1e-baf0-2c87c82fafd7)
+
+```py
+df_dropped = df.dropna()
+df_dropped
 ```
-  </td>
-  <td>
-   ```           
-#### OUTPUT:
 
-![Screenshot 2024-03-08 111323](https://github.com/silambarasan2004/exno1/assets/119559917/c09aa757-5bd6-4425-ae05-bfd87a976985)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/e7881fae-d374-4f76-bac8-481821e6461e)
+
+```py
+df.fillna({'GENDER':'MALE','NAME':'KANISHKAR','ADDRESS':'POONAMALEE','M1':98,'M2':87,'M3':76,'M4':92,'TOTAL':305,'AVG':89.999999})
+```
+![WhatsApp Image 2024-02-26 at 10 16 32_b866136c](https://github.com/KANISHKAR2607/exno1/assets/118886772/6a2c7ddf-f022-477f-8420-6cca78668e0d)
 
 
+<hr><hr>
+
+<h3 align="center">IQR(Inter Quartile Range)</h3>
+
+```py
+import pandas as pd
+```
+
+```py
+ir=pd.read_csv('iris.csv')
+ir
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/32840cf3-736d-4c4b-bc8e-2d55ee7e1417)
+
+```py
+ir.describe()
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/e0ce99a8-f7b9-4ccd-9ac8-df82b53f4bc6)
+
+```py
+import seaborn as sns
+```
+
+```py
+
+sns.boxplot(x='sepal_width',data=ir)
+```
 
 
-</td>
-</tr>
-<tr>
-  <td width=50%>
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/1c9bfcae-a2b3-4573-b204-c2590c8bc9a6)
 
-# Result:
-  Thus the program for data cleaning using python has executed successfully.
+
+```py
+c1=ir.sepal_width.quantile(0.25)
+c3=ir.sepal_width.quantile(0.75)
+iq=c3-c1
+print(c3)
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/05ef4457-91f5-4a19-b413-1d4eea93b0a7)
+
+```py
+
+rid=ir[((ir.sepal_width<(c1-1.5*iq))|(ir.sepal_width>(c3+1.5*iq)))]
+rid['sepal_width']
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/c554ef7e-012c-40f6-8b82-dbe4ae9a20b3)
+
+```py
+delid=ir[~((ir.sepal_width<(c1-1.5*iq))|(ir.sepal_width>(c3+1.5*iq)))]
+delid
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/0a32cc24-1970-41a2-acf7-cb58a6955c01)
+
+```py
+sns.boxplot(x='sepal_width',data=delid)
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/19664bc6-f558-48f3-b449-fa6652c4e7ed)
+
+<hr><hr>
+
+<h3 align="center">Z-Score</h3>
+
+```py
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import scipy.stats as stats
+```
+```py
+dataset=pd.read_csv("heights.csv")
+dataset
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/080b6095-73da-4bee-a763-08c7a0b81a07)
+
+```py
+df = pd.read_csv("heights.csv")
+q1 = df['height'].quantile(0.25)
+q2 = df['height'].quantile(0.5)
+q3 = df['height'].quantile(0.75)
+```
+
+```py
+iqr = q3-q1
+iqr
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/ffb0b515-5964-4405-9e0b-6d2c986c3308)
+
+
+```py
+low = q1 - 1.5*iqr
+low
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/b68f4b97-1246-4747-9aff-06e058c94f44)
+
+```py
+high = q3 + 1.5*iqr
+high
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/da8aa517-c1de-4e43-91d6-ec677f8beaa5)
+
+
+```py
+df1 = df[((df['height'] >=low)& (df['height'] <=high))]
+df1
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/5444510b-6eb1-4fdd-a65f-02c85bd685d4)
+
+
+```py
+z = np.abs(stats.zscore(df['height']))
+z
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/02efcb16-a37a-4313-8111-7396dbd21f2e)
+
+```py
+df1 = df[z<3]
+df1
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/fbfd480f-960d-4d51-8695-71718cc8a342)
+
+<hr>
+
+## Result
+<br>
+
+### Hence the data was cleaned , outliers were detected and removed.
